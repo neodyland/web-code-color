@@ -9,3 +9,5 @@ export function parse(path: string, code: string) {
     }
     return [lang[1], rparse(code, lang[0])] as const;
 }
+
+export * from "./color";

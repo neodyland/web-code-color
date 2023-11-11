@@ -2,28 +2,28 @@ import { ColorConfig } from ".";
 
 export const DARK: ColorConfig = {
     comments: {
-        value: "#6a9955",
+        value: "#8b949e",
     },
     strings: {
-        value: "#ce9178",
+        value: "#a5d6ff",
     },
     numbers: {
-        value: "#b5cea8",
+        value: "#79c0ff",
     },
     keywords: {
-        value: "#569cd6",
+        value: "#ff7b72",
     },
     operators: {
-        value: "#d4d4d4",
+        value: "white",
     },
     identifiers: {
-        value: "#9cdcfe",
+        value: "#d2a8ff",
     },
     punctuations: {
-        value: "#d4d4d4",
+        value: "white",
     },
     whitespaces: {
-        value: "#d4d4d4",
+        value: "white",
     },
     bgColor: "#1e1e1e",
 };

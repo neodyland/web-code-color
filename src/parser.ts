@@ -38,9 +38,6 @@ export function parse(raw_source: string, lang: Lang) {
     for (const punctuation of lang.punctuations) {
         source = replace(source, punctuation, TokenType.Punctuation);
     }
-    for (const whitespace of lang.whitespaces) {
-        source = replace(source, whitespace, TokenType.Whitespace);
-    }
     return source;
 }
 

@@ -8,7 +8,6 @@ export interface ColorConfig {
     operators: Color;
     identifiers: Color;
     punctuations: Color;
-    whitespaces: Color;
     bgColor?: string;
 }
 
@@ -28,7 +27,6 @@ const tokenTypeMapping = {
     [TokenType.Operator]: "operators",
     [TokenType.Identifier]: "identifiers",
     [TokenType.Punctuation]: "punctuations",
-    [TokenType.Whitespace]: "whitespaces",
     [TokenType.Other]: "whitespaces",
 } as const;
 

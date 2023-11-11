@@ -10,5 +10,4 @@ export const JSON: Lang = {
     operators: [":", ",", "\\[", "\\]", "\\{", "\\}"],
     identifiers: ["[a-zA-Z]+"],
     punctuations: ["\\."],
-    whitespaces: ["[ \t\n]+"],
 };

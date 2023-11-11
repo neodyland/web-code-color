@@ -8,7 +8,6 @@ export interface Lang {
     operators: string[];
     identifiers: string[];
     punctuations: string[];
-    whitespaces: string[];
 }
 
 export const enum TokenType {
@@ -19,7 +18,6 @@ export const enum TokenType {
     Operator,
     Identifier,
     Punctuation,
-    Whitespace,
     Other,
 }
 

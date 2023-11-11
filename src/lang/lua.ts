@@ -6,8 +6,8 @@ export const LUA: Lang = {
     comments: [
         {
             is_regex: true,
-            value: '([^"]|^)([^"]*)(--.*?\n)',
-            match_at: 3,
+            value: "(--[^\"'\n]*)(\n|$)",
+            match_at: 1,
         },
     ],
     strings: ['".*?"', "'.*?'"],

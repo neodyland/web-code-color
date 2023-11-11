@@ -1,8 +1,8 @@
 const webcolor = require(".");
-//const { readFileSync } = require("fs");
+const { readFileSync } = require("fs");
 
-const text = `
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+let text = `
+  local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
         vim.fn.system({
                 "git",
@@ -25,8 +25,9 @@ local opts = {
 vim.g.mapleader = " "
 require("lazy").setup("ggfn/plugins", opts)
 `;
+text = readFileSync("test.cjs", "utf-8");
 
-const tokens = webcolor.autoparse("test.lua", text)[1];
+const tokens = webcolor.autoparse("test.cjs", text)[1];
 // from https://github.com/highlightjs/highlight.js/blob/main/src/styles/github-dark.css
 // compare to https://highlightjs.org/demo#lang=javascript&v=1&theme=github-dark
 const theme = {

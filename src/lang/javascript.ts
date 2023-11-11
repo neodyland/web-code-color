@@ -2,16 +2,16 @@ import { Lang } from "../interface";
 
 export const JAVSCRIPT: Lang = {
     name: "JavaScript",
-    ext: "(c|m)?js$",
+    ext: "(c|m)?(j|t)sx?$",
     comments: [
         {
             is_regex: true,
-            value: '/([^"]|^)([^"]*)(/.*?\n)',
-            match_at: 2,
+            value: "(//[^\"'`\n]*)(\n|$)",
+            match_at: 1,
         },
-        { is_regex: true, value: '/([^"]|^)([^"]*)(\\*.*?\\*/)', match_at: 2 },
+        { is_regex: true, value: "(/\\*[^\"'`\n]*\\*/)(\n|$)", match_at: 1 },
     ],
-    strings: ['".*?"', "'.*?'"],
+    strings: ["`[^`]*`", '"[^\n]*?"', "'[^\n]*?'"],
     numbers: ["[0-9]+(\\.[0-9]+)?", "0x[0-9a-fA-F]+"],
     keywords: [
         {

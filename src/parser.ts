@@ -1,4 +1,4 @@
-import { Lang, Token, TokenType } from "./interface";
+import { Lang, Token, TokenType, Match } from "./interface";
 
 export function detectLang(source_path: string, lang: Lang[]) {
     for (const l of lang) {
@@ -11,15 +11,13 @@ export function detectLang(source_path: string, lang: Lang[]) {
 }
 
 function escapeHtml(code: string) {
-    return code.replace(/[&'`"<>]/g, (match) => {
-        return {
-            "&": "&amp;",
-            "'": "&#x27;",
-            "`": "&#x60;",
-            '"': "&quot;",
-            "<": "&lt;",
-            ">": "&gt;",
-        }[match] || "";
+    return code.replace(/[<>]/g, (match) => {
+        return (
+            {
+                "<": "&lt;",
+                ">": "&gt;",
+            }[match] || ""
+        );
     });
 }
 
@@ -27,7 +25,7 @@ export function parse(raw_source: string, lang: Lang, escape = true) {
     let source = [
         {
             type: TokenType.Other,
-            value: escape ? escapeHtml(raw_source) : raw_source,
+            value: raw_source,
         },
     ];
     for (const comment of lang.comments) {
@@ -51,36 +49,84 @@ export function parse(raw_source: string, lang: Lang, escape = true) {
     for (const punctuation of lang.punctuations) {
         source = replace(source, punctuation, TokenType.Punctuation);
     }
-    return source;
+    return source.map((token) => {
+        return {
+            type: token.type,
+            value: escape ? escapeHtml(token.value) : token.value,
+        };
+    });
 }
 
-function replace(source: Token[], pattern: string, type: TokenType) {
+function transformPattern(pattern: Match) {
+    if (typeof pattern == "string") {
+        return {
+            is_regex: true,
+            value: pattern,
+        } as const;
+    } else {
+        return {
+            is_regex: false,
+            value: pattern.value,
+        } as const;
+    }
+}
+
+function replace(source: Token[], pattern: Match, type: TokenType) {
     let new_source = [];
     for (const token of source) {
         if (token.type == TokenType.Other) {
             let start = 0;
-            for (const found of token.value.matchAll(
-                new RegExp(pattern, "g"),
-            )) {
-                const foundIndex = found.index || 0;
-                let end = foundIndex + found[0].length;
-                if (start < foundIndex) {
+            const pat = transformPattern(pattern);
+            if (pat.is_regex) {
+                for (const found of token.value.matchAll(
+                    new RegExp(pat.value, "g"),
+                )) {
+                    const foundValue = found[1] || found[0];
+                    const foundIndex = found.index || 0;
+                    let end = foundIndex + foundValue.length;
+                    if (start < foundIndex) {
+                        new_source.push({
+                            type: TokenType.Other,
+                            value: token.value.slice(start, foundIndex),
+                        });
+                    }
+                    new_source.push({
+                        type,
+                        value: token.value.slice(foundIndex, end),
+                    });
+                    start = end;
+                }
+                if (start < token.value.length) {
                     new_source.push({
                         type: TokenType.Other,
-                        value: token.value.slice(start, foundIndex),
+                        value: token.value.slice(start),
                     });
                 }
-                new_source.push({
-                    type,
-                    value: token.value.slice(foundIndex, end),
-                });
-                start = end;
-            }
-            if (start < token.value.length) {
-                new_source.push({
-                    type: TokenType.Other,
-                    value: token.value.slice(start),
-                });
+            } else {
+                // replace all matching strings
+                while (true) {
+                    const foundIndex = token.value.indexOf(pat.value);
+                    if (foundIndex < 0) {
+                        break;
+                    }
+                    new_source.push({
+                        type: TokenType.Other,
+                        value: token.value.slice(0, foundIndex),
+                    });
+                    new_source.push({
+                        type,
+                        value: token.value.slice(
+                            foundIndex,
+                            foundIndex + pat.value.length,
+                        ),
+                    });
+                    token.value = token.value.slice(
+                        foundIndex + pat.value.length,
+                    );
+                }
+                if (token.value.length > 0) {
+                    new_source.push(token);
+                }
             }
         } else {
             new_source.push(token);

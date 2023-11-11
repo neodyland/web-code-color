@@ -1,16 +1,23 @@
 export interface Lang {
     name: string;
     ext: string;
-    comments: string[];
-    strings: string[];
-    numbers: string[];
-    keywords: string[];
-    operators: string[];
-    identifiers: string[];
-    punctuations: string[];
+    comments: Match[];
+    strings: Match[];
+    numbers: Match[];
+    keywords: Match[];
+    operators: Match[];
+    identifiers: Match[];
+    punctuations: Match[];
 }
 
-export const enum TokenType {
+export type Match =
+    | string
+    | {
+          is_regex: false;
+          value: string;
+      };
+
+export enum TokenType {
     Comment,
     String,
     Number,

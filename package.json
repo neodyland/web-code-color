@@ -1,6 +1,6 @@
 {
   "name": "web-code-color",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A small syntax highlight library for web",
   "main": "dist/index.cjs",
   "types": "dist/index.d.ts",

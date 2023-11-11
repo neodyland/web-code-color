@@ -1,7 +1,12 @@
-const { autoparse, colorlize, simpleHtml, DARK } = require(".");
+const webcolor = require(".");
 const { readFileSync } = require("fs");
-const js = autoparse("test.cjs", "<a></a>")[1];
-const [jsc, bg] = colorlize(js, DARK);
-const jsm = simpleHtml(jsc, bg);
+const js = webcolor.autoparse(
+    "test.cjs",
+    readFileSync("./test.cjs", "utf-8"),
+)[1];
+const [jsc, bg] = webcolor.colorlize(js, webcolor.DARK);
+const jsm = webcolor.simpleHtml(jsc, bg);
 
 console.log(jsm);
+
+// link support https://github.com/neodyland

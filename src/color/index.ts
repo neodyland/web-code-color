@@ -59,8 +59,23 @@ function escapeHtml(str: string) {
     });
 }
 
-export function simpleHtml(tokens: ColoredToken[], bg?: string) {
+export interface SimpleHtmlConfig {
+    bg?: string;
+    links?: boolean;
+}
+
+export function simpleHtml(
+    tokens: ColoredToken[],
+    cfg: SimpleHtmlConfig | string = {},
+) {
     let html = "";
+    if (typeof cfg === "string") {
+        cfg = { bg: cfg };
+    }
+    cfg = {
+        links: true,
+        ...cfg,
+    };
     for (const token of tokens) {
         const classValue = token.class
             ? ` class="${escapeHtml(token.class)}"`
@@ -76,8 +91,14 @@ export function simpleHtml(tokens: ColoredToken[], bg?: string) {
             : "";
         html += `<span${classValue}${style}>${escapeHtml(token.text)}</span>`;
     }
+    if (cfg.links) {
+        html = html.replace(
+            /(https?:\/\/[^\s]+)/g,
+            '<a href="$1" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;:hover:{text-decoration:underline}">$1</a>',
+        );
+    }
     return `<pre${
-        bg ? ` style="background-color: ${escapeHtml(bg)}"` : ""
+        cfg.bg ? ` style="background-color: ${escapeHtml(cfg.bg)}"` : ""
     }><code>${html}</code></pre>`;
 }
 

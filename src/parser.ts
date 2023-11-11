@@ -10,11 +10,24 @@ export function detectLang(source_path: string, lang: Lang[]) {
     return null;
 }
 
-export function parse(raw_source: string, lang: Lang) {
+function escapeHtml(code: string) {
+    return code.replace(/[&'`"<>]/g, (match) => {
+        return {
+            "&": "&amp;",
+            "'": "&#x27;",
+            "`": "&#x60;",
+            '"': "&quot;",
+            "<": "&lt;",
+            ">": "&gt;",
+        }[match] || "";
+    });
+}
+
+export function parse(raw_source: string, lang: Lang, escape = true) {
     let source = [
         {
             type: TokenType.Other,
-            value: raw_source,
+            value: escape ? escapeHtml(raw_source) : raw_source,
         },
     ];
     for (const comment of lang.comments) {

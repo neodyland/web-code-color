@@ -22,7 +22,7 @@ export const DISCORD: ColorConfig = {
     punctuations: {
         value: "white",
     },
-    whitespaces: {
+    others: {
         value: "white",
     },
     bgColor: "black",

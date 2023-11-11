@@ -22,7 +22,7 @@ export const DARK: ColorConfig = {
     punctuations: {
         value: "white",
     },
-    whitespaces: {
+    others: {
         value: "white",
     },
     bgColor: "#1e1e1e",

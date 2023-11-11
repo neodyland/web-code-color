@@ -8,6 +8,7 @@ export interface ColorConfig {
     operators: Color;
     identifiers: Color;
     punctuations: Color;
+    others: Color;
     bgColor?: string;
 }
 
@@ -27,7 +28,7 @@ const tokenTypeMapping = {
     [TokenType.Operator]: "operators",
     [TokenType.Identifier]: "identifiers",
     [TokenType.Punctuation]: "punctuations",
-    [TokenType.Other]: "whitespaces",
+    [TokenType.Other]: "others",
 } as const;
 
 export function colorlize(tokens: Token[], settings: ColorConfig) {

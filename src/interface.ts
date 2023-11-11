@@ -13,8 +13,9 @@ export interface Lang {
 export type Match =
     | string
     | {
-          is_regex: false;
+          is_regex: boolean;
           value: string;
+          match_at?: number;
       };
 
 export enum TokenType {

@@ -65,8 +65,9 @@ function transformPattern(pattern: Match) {
         } as const;
     } else {
         return {
-            is_regex: false,
+            is_regex: pattern.is_regex,
             value: pattern.value,
+            match_at: pattern.match_at,
         } as const;
     }
 }
@@ -79,10 +80,13 @@ function replace(source: Token[], pattern: Match, type: TokenType) {
             const pat = transformPattern(pattern);
             if (pat.is_regex) {
                 for (const found of token.value.matchAll(
-                    new RegExp(pat.value, "g"),
+                    new RegExp(pat.value, "gd"),
                 )) {
-                    const foundValue = found[1] || found[0];
-                    const foundIndex = found.index || 0;
+                    const foundValue = found[pat.match_at || 0];
+                    const foundIndex =
+                        found.indices?.[pat.match_at || 0][0] ||
+                        found.index ||
+                        0;
                     let end = foundIndex + foundValue.length;
                     if (start < foundIndex) {
                         new_source.push({

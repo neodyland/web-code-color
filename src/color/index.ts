@@ -1,5 +1,6 @@
 import { Token, TokenType } from "../interface";
 import { autoparse } from "../";
+import { escapeHtml } from "../util";
 
 export interface ColorConfig {
     comments: Color;
@@ -47,31 +48,17 @@ export function colorlize(tokens: Token[], settings: ColorConfig) {
     return [colored, settings.bgColor] as const;
 }
 
-function escapeHtml(str: string) {
-    return str.replace(/[&'`"<>]/g, (match) => {
-        return (
-            {
-                "&": "&amp;",
-                "'": "&#x27;",
-                "`": "&#x60;",
-                '"': "&quot;",
-                "<": "&lt;",
-                ">": "&gt;",
-            }[match] || ""
-        );
-    });
-}
-
 export interface SimpleHtmlConfig {
     links?: boolean;
 }
 
-export function simpleHtml(tokens: ColoredToken[], cfg: SimpleHtmlConfig = {}) {
-    let html = "";
-    cfg = {
+export function simpleHtml(
+    tokens: ColoredToken[],
+    cfg: SimpleHtmlConfig = {
         links: true,
-        ...cfg,
-    };
+    },
+) {
+    let html = "";
     for (const token of tokens) {
         const classValue = token.class
             ? ` class="${escapeHtml(token.class)}"`

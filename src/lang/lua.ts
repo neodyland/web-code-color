@@ -19,6 +19,7 @@ export const LUA: Lang = {
             match_at: 2,
         },
     ],
+    builtins: [],
     operators: [],
     identifiers: [
         { is_regex: true, value: "([a-zA-Z_][a-zA-Z0-9_]*)\\(", match_at: 1 },

@@ -1,6 +1,6 @@
-import { ColorConfig } from ".";
+import type { ColorConfig } from "../";
 
-export const DARK: ColorConfig = {
+export const GithubDark: ColorConfig = {
     comments: {
         value: "#8b949e",
     },
@@ -13,17 +13,20 @@ export const DARK: ColorConfig = {
     keywords: {
         value: "#ff7b72",
     },
+    builtins: {
+        value: "#ffa657",
+    },
     operators: {
-        value: "white",
+        value: "#c9d1d9",
     },
     identifiers: {
         value: "#d2a8ff",
     },
     punctuations: {
-        value: "white",
+        value: "#c9d1d9",
     },
     others: {
-        value: "white",
+        value: "#c9d1d9",
     },
-    bgColor: "#1e1e1e",
+    bgColor: "#0d1117",
 };

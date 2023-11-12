@@ -5,6 +5,7 @@ export interface ColorConfig {
     strings: Color;
     numbers: Color;
     keywords: Color;
+    builtins: Color;
     operators: Color;
     identifiers: Color;
     punctuations: Color;
@@ -25,6 +26,7 @@ const tokenTypeMapping = {
     [TokenType.String]: "strings",
     [TokenType.Number]: "numbers",
     [TokenType.Keyword]: "keywords",
+    [TokenType.Builtin]: "builtins",
     [TokenType.Operator]: "operators",
     [TokenType.Identifier]: "identifiers",
     [TokenType.Punctuation]: "punctuations",
@@ -93,7 +95,7 @@ export function simpleHtml(
     }
     if (cfg.links) {
         html = html.replace(
-            /(https?:\/\/[^\s]+)/g,
+            /(https?:\/\/[^\s<>]+)/g,
             '<a href="$1" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;:hover:{text-decoration:underline}">$1</a>',
         );
     }
@@ -102,5 +104,5 @@ export function simpleHtml(
     }><code>${html}</code></pre>`;
 }
 
-export { DARK } from "./dark";
-export { DISCORD } from "./discord";
+export { GithubDark } from "./github-dark";
+export { AtomOneDark } from "./atom-one-dark";

@@ -40,6 +40,9 @@ export function parse(raw_source: string, lang: Lang, escape = true) {
     for (const keyword of lang.keywords) {
         source = replace(source, keyword, TokenType.Keyword);
     }
+    for (const builtin of lang.builtins) {
+        source = replace(source, builtin, TokenType.Builtin);
+    }
     for (const operator of lang.operators) {
         source = replace(source, operator, TokenType.Operator);
     }

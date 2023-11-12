@@ -14,6 +14,7 @@ export const JSON: Lang = {
     strings: ['".*?"'],
     numbers: ["[0-9]+(\\.[0-9]+)?", "0x[0-9a-fA-F]+"],
     keywords: ["true", "false", "null"],
+    builtins: [],
     operators: [":", ",", "\\[", "\\]", "\\{", "\\}"],
     identifiers: ["[a-zA-Z]+"],
     punctuations: ["\\."],

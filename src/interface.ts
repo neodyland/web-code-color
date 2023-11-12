@@ -5,6 +5,7 @@ export interface Lang {
     strings: Match[];
     numbers: Match[];
     keywords: Match[];
+    builtins: Match[];
     operators: Match[];
     identifiers: Match[];
     punctuations: Match[];
@@ -23,6 +24,7 @@ export enum TokenType {
     String,
     Number,
     Keyword,
+    Builtin,
     Operator,
     Identifier,
     Punctuation,

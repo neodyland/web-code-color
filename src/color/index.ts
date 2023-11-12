@@ -101,14 +101,30 @@ const languageMap = {
 
 type Language = keyof typeof languageMap;
 
+type HighlightOptions = {
+    theme?: string | ColorConfig;
+    links?: boolean;
+    language?: Language | "auto";
+    filename?: string;
+};
+
+/**
+ *
+ * @param text Text to highlight
+ * @param options
+ * ```ts
+ * type HighlightOptions = {
+ *    theme?: string | ColorConfig;     // Theme name (see readme.md) or theme object (see examples in readme.md)
+ *    links?: boolean;                  // Whether to convert links to <a> tags
+ *    language?: Language | "auto";     // Language name (see readme.md) or "auto" to detect language from filename.
+ *                                      // Your LSP should tell you supported languages.
+ *    filename?: string;                // Filename to detect language from
+ * }
+ * ```
+ */
 export function highlight(
     text: string,
-    options: {
-        theme?: string;
-        links?: boolean;
-        language?: Language | "auto";
-        filename?: string;
-    } = {
+    options: HighlightOptions = {
         theme: "atom-one-dark",
         links: true,
         language: "auto",
@@ -126,7 +142,10 @@ export function highlight(
     if (!tokens) throw new Error("No matching language");
     if (!theme) throw new Error("No theme specified");
 
-    const [coloredTokens, bg] = colorlize(tokens, selectTheme(theme));
+    const [coloredTokens, bg] = colorlize(
+        tokens,
+        typeof theme === "string" ? selectTheme(theme) : theme,
+    );
     const html = simpleHtml(coloredTokens, { links });
     return `<pre style="background-color: ${bg};"><code>${html}</code></pre>`;
 }

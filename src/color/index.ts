@@ -116,10 +116,12 @@ export function highlight(
     },
 ) {
     const { theme, links, language, filename } = options;
+    if (!language) throw new Error("No language specified");
+
     const tokens =
         language === "auto"
             ? autoparse(filename ?? "", text)?.[1]
-            : parse(text, languageMap[language ?? "javascript"]);
+            : parse(text, languageMap[language]);
 
     if (!tokens) throw new Error("No matching language");
     if (!theme) throw new Error("No theme specified");

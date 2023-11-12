@@ -62,18 +62,11 @@ function escapeHtml(str: string) {
 }
 
 export interface SimpleHtmlConfig {
-    bg?: string;
     links?: boolean;
 }
 
-export function simpleHtml(
-    tokens: ColoredToken[],
-    cfg: SimpleHtmlConfig | string = {},
-) {
+export function simpleHtml(tokens: ColoredToken[], cfg: SimpleHtmlConfig = {}) {
     let html = "";
-    if (typeof cfg === "string") {
-        cfg = { bg: cfg };
-    }
     cfg = {
         links: true,
         ...cfg,
@@ -99,9 +92,7 @@ export function simpleHtml(
             '<a href="$1" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;:hover:{text-decoration:underline}">$1</a>',
         );
     }
-    return `<pre${
-        cfg.bg ? ` style="background-color: ${escapeHtml(cfg.bg)}"` : ""
-    }><code>${html}</code></pre>`;
+    return html;
 }
 
 export { GithubDark } from "./github-dark";

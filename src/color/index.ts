@@ -1,6 +1,7 @@
 import { Token, TokenType } from "../interface";
-import { autoparse } from "../";
+import { autoparse, parse } from "../";
 import { escapeHtml } from "../util";
+import { Languages } from "../lang";
 
 export interface ColorConfig {
     comments: Color;
@@ -88,6 +89,42 @@ export function verySimple(name: string, text: string, theme: string) {
     if (!tokens) throw new Error("No matching language");
     const [coloredTokens, bg] = colorlize(tokens, selectTheme(theme));
     const html = simpleHtml(coloredTokens);
+    return `<pre style="background-color: ${bg};"><code>${html}</code></pre>`;
+}
+
+const languageMap = {
+    javascript: Languages.EcmaScript,
+    json: Languages.Json,
+    lua: Languages.Lua,
+};
+
+type Language = keyof typeof languageMap;
+
+export function highlight(
+    text: string,
+    options: {
+        theme?: string;
+        links?: boolean;
+        language?: Language | "auto";
+        filename?: string;
+    } = {
+        theme: "atom-one-dark",
+        links: true,
+        language: "auto",
+        filename: "",
+    },
+) {
+    const { theme, links, language, filename } = options;
+    const tokens =
+        language === "auto"
+            ? autoparse(filename ?? "", text)?.[1]
+            : parse(text, languageMap[language ?? "javascript"]);
+
+    if (!tokens) throw new Error("No matching language");
+    if (!theme) throw new Error("No theme specified");
+
+    const [coloredTokens, bg] = colorlize(tokens, selectTheme(theme));
+    const html = simpleHtml(coloredTokens, { links });
     return `<pre style="background-color: ${bg};"><code>${html}</code></pre>`;
 }
 

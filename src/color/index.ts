@@ -2,6 +2,7 @@ import { Token, TokenType } from "../interface";
 import { autoparse, parse } from "../";
 import { escapeHtml } from "../util";
 import { Languages } from "../lang";
+import { Lang as LanguageInterface } from "../interface";
 
 export interface ColorConfig {
     comments: Color;
@@ -106,7 +107,7 @@ type Language = keyof typeof languageMap;
 type HighlightOptions = {
     theme?: string | ColorConfig;
     links?: boolean;
-    language?: Language | "auto";
+    language?: Language | "auto" | LanguageInterface;
     filename?: string;
 };
 
@@ -118,7 +119,9 @@ type HighlightOptions = {
  * type HighlightOptions = {
  *    theme?: string | ColorConfig;     // Theme name (see readme.md) or theme object (see examples in readme.md)
  *    links?: boolean;                  // Whether to convert links to <a> tags
- *    language?: Language | "auto";     // Language name (see readme.md) or "auto" to detect language from filename.
+ *    language?: Language | "auto" | LanguageInterface;
+ *                                      // Language name (see readme.md) or "auto" to detect language from filename.
+ *                                      // You can also provide a custom language object. See examples in readme.md.
  *                                      // Your LSP should tell you supported languages.
  *    filename?: string;                // Filename to detect language from
  * }
@@ -139,7 +142,12 @@ export function highlight(
     const tokens =
         language === "auto"
             ? autoparse(filename ?? "", text)?.[1]
-            : parse(text, languageMap[language]);
+            : parse(
+                  text,
+                  typeof language === "string"
+                      ? languageMap[language]
+                      : language,
+              );
 
     if (!tokens) throw new Error("No matching language");
     if (!theme) throw new Error("No theme specified");

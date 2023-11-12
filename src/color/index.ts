@@ -1,4 +1,5 @@
 import { Token, TokenType } from "../interface";
+import { autoparse } from "../";
 
 export interface ColorConfig {
     comments: Color;
@@ -95,5 +96,27 @@ export function simpleHtml(tokens: ColoredToken[], cfg: SimpleHtmlConfig = {}) {
     return html;
 }
 
-export { GithubDark } from "./github-dark";
-export { AtomOneDark } from "./atom-one-dark";
+export function verySimple(name: string, text: string, theme: string) {
+    const tokens = autoparse(name, text)?.[1];
+    if (!tokens) throw new Error("No matching language");
+    const [coloredTokens, bg] = colorlize(tokens, selectTheme(theme));
+    const html = simpleHtml(coloredTokens);
+    return `<pre style="background-color: ${bg};"><code>${html}</code></pre>`;
+}
+
+import { GithubDark } from "./github-dark";
+import { AtomOneDark } from "./atom-one-dark";
+
+export function selectTheme(theme: string) {
+    switch (theme) {
+        case "github-dark":
+            return GithubDark;
+        case "atom-one-dark":
+        case "atom-dark":
+            return AtomOneDark;
+        default:
+            return GithubDark;
+    }
+}
+
+export { GithubDark, AtomOneDark };

@@ -97,6 +97,8 @@ const languageMap = {
     typescript: Languages.EcmaScript,
     json: Languages.Json,
     lua: Languages.Lua,
+    rust: Languages.Rust,
+    python: Languages.Python,
 };
 
 type Language = keyof typeof languageMap;

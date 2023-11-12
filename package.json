@@ -10,7 +10,8 @@
     "build:trans": "node build.mjs",
     "build:tsc": "tsc",
     "build": "run-s build:trans build:tsc",
-    "prepublishOnly": "run-s build"
+    "prepublishOnly": "run-s build",
+    "test": "npx http-server -p 8080 -c-1"
   },
   "keywords": [
     "color",

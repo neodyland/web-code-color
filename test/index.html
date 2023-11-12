@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Demo</title>
+    <script type="module">
+      import { autoparse, colorlize, AtomOneDark, simpleHtml } from "../dist/index.mjs";
+      function apply(name, text) {
+        const now = performance.now();
+        const tokens = autoparse(name, text)[1];
+        const [coloredTokens, bg] = colorlize(
+          tokens,
+          AtomOneDark,
+        );
+        const html = simpleHtml(coloredTokens);
+        console.log(`${performance.now() - now}ms`);
+        document.querySelector("code").innerHTML = html;
+        document.querySelector("pre").style.backgroundColor = bg;
+      }
+      document.querySelector("button").addEventListener("click", () => {
+        const name = document.querySelector("input").value;
+        const text = document.querySelector("textarea").value;
+        apply(name, text);
+      });
+    </script>
+  </head>
+  <body>
+    <style>
+      @font-face {
+        font-family: "Hack Nerd";
+        src: url("https://mshaugh.github.io/nerdfont-webfonts/build/hack-nerd-font.css") format("truetype");
+      }
+      code {
+        font-family: "Hack Nerd";
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+      }
+      pre {
+        overflow: auto;
+        padding: 1rem;
+        border-radius: 0.5rem;
+      }
+    </style>
+    <input type="text" value="index.js" />
+    <textarea></textarea>
+    <button>Apply</button>
+    <pre><code></code></pre>
+  </body>
+</html>

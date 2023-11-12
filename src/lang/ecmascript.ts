@@ -1,7 +1,7 @@
 import { Lang } from "../interface";
 
-export const JAVSCRIPT: Lang = {
-    name: "JavaScript",
+export const EcmaScript: Lang = {
+    name: "EcmaScript",
     ext: "(c|m)?(j|t)sx?$",
     comments: [
         {

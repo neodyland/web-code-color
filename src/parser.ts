@@ -21,7 +21,7 @@ function escapeHtml(code: string) {
     });
 }
 
-export function parse(raw_source: string, lang: Lang, escape = true) {
+export function parse(raw_source: string, lang: Lang, escapeIllegalCharacters = true) {
     let source = [
         {
             type: TokenType.Other,
@@ -55,13 +55,13 @@ export function parse(raw_source: string, lang: Lang, escape = true) {
     return source.map((token) => {
         return {
             type: token.type,
-            value: escape ? escapeHtml(token.value) : token.value,
+            value: escapeIllegalCharacters ? escapeHtml(token.value) : token.value,
         };
     });
 }
 
 function transformPattern(pattern: Match) {
-    if (typeof pattern == "string") {
+    if (typeof pattern === "string") {
         return {
             is_regex: true,
             value: pattern,
@@ -76,9 +76,9 @@ function transformPattern(pattern: Match) {
 }
 
 function replace(source: Token[], pattern: Match, type: TokenType) {
-    let new_source = [];
+    const new_source = [];
     for (const token of source) {
-        if (token.type == TokenType.Other) {
+        if (token.type === TokenType.Other) {
             let start = 0;
             const pat = transformPattern(pattern);
             if (pat.is_regex) {
@@ -90,7 +90,7 @@ function replace(source: Token[], pattern: Match, type: TokenType) {
                         found.indices?.[pat.match_at || 0][0] ||
                         found.index ||
                         0;
-                    let end = foundIndex + foundValue.length;
+                    const end = foundIndex + foundValue.length;
                     if (start < foundIndex) {
                         new_source.push({
                             type: TokenType.Other,

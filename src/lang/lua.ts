@@ -1,6 +1,6 @@
 import { Lang } from "../interface";
 
-export const LUA: Lang = {
+export const Lua: Lang = {
     name: "Lua",
     ext: "lua$",
     comments: [

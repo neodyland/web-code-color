@@ -1,6 +1,6 @@
 import { Lang } from "../interface";
 
-export const JSON: Lang = {
+export const Json: Lang = {
     name: "JSON",
     ext: "json(5|c)?$",
     comments: [

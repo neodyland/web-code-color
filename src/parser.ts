@@ -1,5 +1,4 @@
 import { Lang, Token, TokenType, Match } from "./interface";
-import { escapeHtml } from "./util";
 
 export function detectLang(source_path: string, lang: Lang[]) {
     for (const l of lang) {
@@ -11,11 +10,7 @@ export function detectLang(source_path: string, lang: Lang[]) {
     return null;
 }
 
-export function parse(
-    raw_source: string,
-    lang: Lang,
-    escapeIllegalCharacters = true,
-) {
+export function parse(raw_source: string, lang: Lang) {
     let source = [
         {
             type: TokenType.Other,
@@ -46,14 +41,7 @@ export function parse(
     for (const punctuation of lang.punctuations) {
         source = replace(source, punctuation, TokenType.Punctuation);
     }
-    return source.map((token) => {
-        return {
-            type: token.type,
-            value: escapeIllegalCharacters
-                ? escapeHtml(token.value)
-                : token.value,
-        };
-    });
+    return source;
 }
 
 function transformPattern(pattern: Match) {

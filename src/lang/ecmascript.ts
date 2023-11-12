@@ -2,7 +2,7 @@ import { Lang } from "../interface";
 
 export const EcmaScript: Lang = {
     name: "EcmaScript",
-    ext: "(c|m)?(j|t)sx?$",
+    ext: "([cm]?[jt]sx?$|typescript|es6|javascript)",
     comments: [
         {
             is_regex: true,

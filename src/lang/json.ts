@@ -2,7 +2,7 @@ import { Lang } from "../interface";
 
 export const Json: Lang = {
     name: "JSON",
-    ext: "json(5|c)?$",
+    ext: "json[5c]?$",
     comments: [
         {
             is_regex: true,

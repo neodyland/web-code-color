@@ -94,6 +94,7 @@ export function verySimple(name: string, text: string, theme: string) {
 
 const languageMap = {
     javascript: Languages.EcmaScript,
+    typescript: Languages.EcmaScript,
     json: Languages.Json,
     lua: Languages.Lua,
 };

@@ -1,5 +1,6 @@
 import { build } from "esbuild";
-import { stat, rm } from "fs/promises";
+import { minify } from "terser";
+import { stat, rm, readFile, writeFile } from "fs/promises";
 async function exists(path) {
     try {
         await stat(path);
@@ -27,3 +28,31 @@ await build({
     format: "esm",
     minify: true,
 });
+
+const cjs = await minify(
+    await readFile("dist/index.cjs", { encoding: "utf-8" }),
+    {
+        mangle: true,
+        compress: true,
+        format: {
+            comments: false,
+        },
+    },
+);
+
+const esm = await minify(
+    await readFile("dist/index.mjs", { encoding: "utf-8" }),
+    {
+        mangle: true,
+        compress: true,
+        format: {
+            comments: false,
+        },
+        module: true,
+    },
+);
+
+if (cjs.code && esm.code) {
+    await writeFile("dist/index.cjs", cjs.code);
+    await writeFile("dist/index.mjs", esm.code);
+}

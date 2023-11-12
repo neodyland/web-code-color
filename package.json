@@ -1,6 +1,6 @@
 {
   "name": "web-code-color",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A small syntax highlight library for web",
   "main": "dist/index.cjs",
   "types": "dist/index.d.ts",
@@ -13,6 +13,12 @@
     "prepublishOnly": "run-s build",
     "test": "npx http-server -p 8080 -c-1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neodyland/web-code-color.git"
+  },
+  "issues": "https://github.com/neodyland/web-code-color/issues",
+  "homepage": "https://github.com/neodyland/web-code-color#readme",
   "keywords": [
     "color",
     "highlight"

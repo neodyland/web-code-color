@@ -1,11 +1,13 @@
 import { EcmaScript } from "./ecmascript";
 import { Json } from "./json";
 import { Lua } from "./lua";
+import { Rust } from "./rust";
 
-export const LANG = [EcmaScript, Json, Lua];
+export const LANG = [EcmaScript, Json, Lua, Rust];
 
 export const Languages = {
-    EcmaScript: EcmaScript,
-    Json: Json,
-    Lua: Lua,
+    EcmaScript,
+    Json,
+    Lua,
+    Rust,
 } as const;

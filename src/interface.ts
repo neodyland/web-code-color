@@ -20,15 +20,15 @@ export type Match =
       };
 
 export enum TokenType {
-    Comment,
-    String,
-    Number,
-    Keyword,
-    Builtin,
-    Operator,
-    Identifier,
-    Punctuation,
-    Other,
+    Comment = 0,
+    String = 1,
+    Number = 2,
+    Keyword = 3,
+    Builtin = 4,
+    Operator = 5,
+    Identifier = 6,
+    Punctuation = 7,
+    Other = 8,
 }
 
 export interface Token {

@@ -1,11 +1,11 @@
-import { JAVSCRIPT } from "./javascript";
-import { JSON } from "./json";
-import { LUA } from "./lua";
+import { EcmaScript } from "./ecmascript";
+import { Json } from "./json";
+import { Lua } from "./lua";
 
-export const LANG = [JAVSCRIPT, JSON, LUA];
+export const LANG = [EcmaScript, Json, Lua];
 
 export const Languages = {
-    Javascript: JAVSCRIPT,
-    Json: JSON,
-    Lua: LUA,
+    EcmaScript: EcmaScript,
+    Json: Json,
+    Lua: Lua,
 } as const;

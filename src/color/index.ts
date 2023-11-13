@@ -2,6 +2,7 @@ import { Token, TokenType } from "../interface";
 import { autoparse, parse } from "../";
 import { escapeHtml } from "../util";
 import { Languages } from "../lang";
+import { Lang as LanguageInterface } from "../interface";
 
 export interface ColorConfig {
     comments: Color;
@@ -103,14 +104,32 @@ const languageMap = {
 
 type Language = keyof typeof languageMap;
 
+type HighlightOptions = {
+    theme?: string | ColorConfig;
+    links?: boolean;
+    language?: Language | "auto" | LanguageInterface;
+    filename?: string;
+};
+
+/**
+ *
+ * @param text Text to highlight
+ * @param options
+ * ```ts
+ * type HighlightOptions = {
+ *    theme?: string | ColorConfig;     // Theme name (see readme.md) or theme object (see examples in readme.md)
+ *    links?: boolean;                  // Whether to convert links to <a> tags
+ *    language?: Language | "auto" | LanguageInterface;
+ *                                      // Language name (see readme.md) or "auto" to detect language from filename.
+ *                                      // You can also provide a custom language object. See examples in readme.md.
+ *                                      // Your LSP should tell you supported languages.
+ *    filename?: string;                // Filename to detect language from
+ * }
+ * ```
+ */
 export function highlight(
     text: string,
-    options: {
-        theme?: string;
-        links?: boolean;
-        language?: Language | "auto";
-        filename?: string;
-    } = {
+    options: HighlightOptions = {
         theme: "atom-one-dark",
         links: true,
         language: "auto",
@@ -123,12 +142,20 @@ export function highlight(
     const tokens =
         language === "auto"
             ? autoparse(filename ?? "", text)?.[1]
-            : parse(text, languageMap[language]);
+            : parse(
+                  text,
+                  typeof language === "string"
+                      ? languageMap[language]
+                      : language,
+              );
 
     if (!tokens) throw new Error("No matching language");
     if (!theme) throw new Error("No theme specified");
 
-    const [coloredTokens, bg] = colorlize(tokens, selectTheme(theme));
+    const [coloredTokens, bg] = colorlize(
+        tokens,
+        typeof theme === "string" ? selectTheme(theme) : theme,
+    );
     const html = simpleHtml(coloredTokens, { links });
     return `<pre style="background-color: ${bg};"><code>${html}</code></pre>`;
 }

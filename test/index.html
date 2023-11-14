@@ -1,45 +1,54 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Demo</title>
-    <script type="module">
-      import { verySimple } from "../dist/index.mjs";
-      document.querySelector("button").addEventListener("click", () => {
-        const name = document.querySelector("input").value;
-        const text = document.querySelector("textarea").value;
-        const theme = document.querySelector("select").value;
-        const now = performance.now();
-        const html = verySimple(name, text, theme);
-        console.log(`${performance.now() - now}ms`);
-        document.querySelector("div#root").innerHTML = html;
-      });
-    </script>
-  </head>
-  <body>
-    <style>
-      @font-face {
-        font-family: "Hack Nerd";
-        src: url("https://mshaugh.github.io/nerdfont-webfonts/build/hack-nerd-font.css") format("truetype");
-      }
-      code {
-        font-family: "Hack Nerd";
-        font-size: 0.875rem;
-        line-height: 1.25rem;
-      }
-      pre {
-        overflow: auto;
-        padding: 1rem;
-        border-radius: 0.5rem;
-      }
-    </style>
-    <input type="text" value="index.js" />
-    <select>
-      <option value="github-dark">GitHub Dark</option>
-      <option value="atom-one-dark">Atom One Dark</option>
-    </select>
-    <textarea></textarea>
-    <button>Apply</button>
-    <div id="root"></div>
-  </body>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Demo</title>
+  <script type="module">
+    import {verySimple} from "../dist/index.mjs";
+    document.querySelector("button").addEventListener("click", () => {
+      const name = document.querySelector("select[name=lang]").value;
+      const text = document.querySelector("textarea").value;
+      const theme = document.querySelector("select[name=theme]").value;
+      const now = performance.now();
+      const html = verySimple(name, text, theme);
+      console.log(`${performance.now() - now}ms`);
+      document.querySelector("div#root").innerHTML = html;
+    });
+  </script>
+  <link rel="stylesheet" href="https://mshaugh.github.io/nerdfont-webfonts/build/hack-nerd-font.css" />
+</head>
+
+<body>
+  <style>
+    code {
+      font-family: "Hack Nerd Font";
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
+
+    pre {
+      overflow: auto;
+      padding: 1rem;
+      border-radius: 0.5rem;
+    }
+  </style>
+  <select name="lang">
+    <option value="rs">Rust</option>
+    <option value="js">JavaScript</option>
+    <option value="go">Golang</option>
+    <option value="py">Python</option>
+    <option value="json">JSON</option>
+    <option value="lua">Lua</option>
+  </select>
+  <select name="theme">
+    <option value="github-dark">GitHub Dark</option>
+    <option value="atom-one-dark">Atom One Dark</option>
+    <option value="tokyo-night-dark">Tokyo Night Dark</option>
+  </select>
+  <textarea></textarea>
+  <button>Apply</button>
+  <div id="root"></div>
+</body>
+
 </html>

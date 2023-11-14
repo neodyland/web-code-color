@@ -1,8 +1,8 @@
-import { Token, TokenType } from "../interface";
 import { autoparse, parse } from "../";
-import { escapeHtml } from "../util";
-import { Languages } from "../lang";
+import { Token, TokenType } from "../interface";
 import { Lang as LanguageInterface } from "../interface";
+import { Languages, Language, languageMap } from "../lang";
+import { escapeHtml } from "../util";
 
 export interface ColorConfig {
     comments: Color;
@@ -93,17 +93,6 @@ export function verySimple(name: string, text: string, theme: string) {
     return `<pre style="background-color: ${bg};"><code>${html}</code></pre>`;
 }
 
-const languageMap = {
-    javascript: Languages.EcmaScript,
-    typescript: Languages.EcmaScript,
-    json: Languages.Json,
-    lua: Languages.Lua,
-    rust: Languages.Rust,
-    python: Languages.Python,
-};
-
-type Language = keyof typeof languageMap;
-
 type HighlightOptions = {
     theme?: string | ColorConfig;
     links?: boolean;
@@ -160,8 +149,9 @@ export function highlight(
     return `<pre style="background-color: ${bg};"><code>${html}</code></pre>`;
 }
 
-import { GithubDark } from "./github-dark";
 import { AtomOneDark } from "./atom-one-dark";
+import { GithubDark } from "./github-dark";
+import { TokyoNightDark } from "./tokyo-night-dark";
 
 export function selectTheme(theme: string) {
     switch (theme) {
@@ -171,9 +161,14 @@ export function selectTheme(theme: string) {
         case "atom-one-dark":
         case "atom-dark":
             return AtomOneDark;
+        case "tokyo-night-dark":
+        case "tokyo-night":
+        case "tk-night":
+        case "tk-night-dark":
+            return TokyoNightDark;
         default:
             return GithubDark;
     }
 }
 
-export { GithubDark, AtomOneDark };
+export { GithubDark, AtomOneDark, TokyoNightDark };

@@ -1,5 +1,11 @@
-import { CComments, CIdents, CNumbers, CStrings } from "./common";
 import { Lang } from "../interface";
+import {
+    CComments,
+    CIdents,
+    CNumbers,
+    CStrings,
+    StartEndIdent,
+} from "./common";
 
 export const EcmaScript: Lang = {
     name: "EcmaScript",
@@ -17,8 +23,8 @@ export const EcmaScript: Lang = {
     builtins: [
         {
             is_regex: true,
-            value: "([^a-zA-Z0-9_]|^)(Object|Function|Boolean|Symbol|Math|Date|Number|BigInt|String|RegExp|Array|Float32Array|Float64Array|Int8Array|Int16Array|Int32Array|Uint8Array|Uint8ClampedArray|Uint16Array|Uint32Array|ArrayBuffer|SharedArrayBuffer|Atomics|DataView|JSON|Promise|Generator|GeneratorFunction|AsyncFunction|Iterator|AsyncIterator|Error|EvalError|RangeError|ReferenceError|SyntaxError|TypeError|URIError|Map|Set|WeakMap|WeakSet|Proxy|Reflect|Intl|WebAssembly|arguments|require|module|exports|globalThis|console|window|self|document|localStorage|sessionStorage|setTimeout|clearTimeout|setInterval|clearInterval|queueMicrotask|requestAnimationFrame|cancelAnimationFrame|alert|confirm|prompt|open|close|eval|isFinite|isNaN|parseFloat|parseInt|decodeURI|decodeURIComponent|encodeURI|encodeURIComponent|escape|unescape|Object|Function|Boolean|Symbol|Math|Date|Number|BigInt|String|RegExp|Array|Float32Array|Float64Array|Int8Array|Int16Array|Int32Array|Uint8Array|Uint8ClampedArray|Uint16Array|Uint32Array|ArrayBuffer|SharedArrayBuffer|Atomics|DataView|JSON|Promise|Generator|GeneratorFunction|AsyncFunction|Iterator|AsyncIterator|Error|EvalError|RangeError|ReferenceError|SyntaxError|TypeError|URIError|Map|Set|WeakMap|WeakSet|Proxy|Reflect|Intl|WebAssembly|arguments|require|module|exports|globalThis|console|window|self|document|localStorage|sessionStorage|setTimeout|clearTimeout|setInterval|clearInterval|queueMicrotask|requestAnimationFrame|cancelAnimationFrame|alert|confirm|prompt|open|close|eval|isFinite|isNaN|parseFloat|parseInt|decodeURI|decodeURIComponent|encodeURI|encodeURIComponent|escape|unescape)",
-            match_at: 2,
+            value: "Object|Function|Boolean|Symbol|Math|Date|Number|BigInt|String|RegExp|Array|Float32Array|Float64Array|Int8Array|Int16Array|Int32Array|Uint8Array|Uint8ClampedArray|Uint16Array|Uint32Array|ArrayBuffer|SharedArrayBuffer|Atomics|DataView|JSON|Promise|Generator|GeneratorFunction|AsyncFunction|Iterator|AsyncIterator|Error|EvalError|RangeError|ReferenceError|SyntaxError|TypeError|URIError|Map|Set|WeakMap|WeakSet|Proxy|Reflect|Intl|WebAssembly|arguments|require|module|exports|globalThis|console|window|self|document|localStorage|sessionStorage|setTimeout|clearTimeout|setInterval|clearInterval|queueMicrotask|requestAnimationFrame|cancelAnimationFrame|alert|confirm|prompt|open|close|eval|isFinite|isNaN|parseFloat|parseInt|decodeURI|decodeURIComponent|encodeURI|encodeURIComponent|escape|unescape|Object|Function|Boolean|Symbol|Math|Date|Number|BigInt|String|RegExp|Array|Float32Array|Float64Array|Int8Array|Int16Array|Int32Array|Uint8Array|Uint8ClampedArray|Uint16Array|Uint32Array|ArrayBuffer|SharedArrayBuffer|Atomics|DataView|JSON|Promise|Generator|GeneratorFunction|AsyncFunction|Iterator|AsyncIterator|Error|EvalError|RangeError|ReferenceError|SyntaxError|TypeError|URIError|Map|Set|WeakMap|WeakSet|Proxy|Reflect|Intl|WebAssembly|arguments|require|module|exports|globalThis|console|window|self|document|localStorage|sessionStorage|setTimeout|clearTimeout|setInterval|clearInterval|queueMicrotask|requestAnimationFrame|cancelAnimationFrame|alert|confirm|prompt|open|close|eval|isFinite|isNaN|parseFloat|parseInt|decodeURI|decodeURIComponent|encodeURI|encodeURIComponent|escape|unescape",
+            ...StartEndIdent,
         },
     ],
     operators: [],

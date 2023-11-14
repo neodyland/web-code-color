@@ -55,6 +55,8 @@ function transformPattern(pattern: Match) {
             is_regex: pattern.is_regex,
             value: pattern.value,
             match_at: pattern.match_at,
+            end: pattern.end,
+            start: pattern.start,
         } as const;
     }
 }
@@ -74,6 +76,20 @@ function replace(source: Token[], pattern: Match, type: TokenType) {
                         found.indices?.[pat.match_at || 0][0] ||
                         found.index ||
                         0;
+                    if (pat.start) {
+                        const before = token.value.slice(0, foundIndex);
+                        if (!before.match(pat.start)) {
+                            continue;
+                        }
+                    }
+                    if (pat.end) {
+                        const after = token.value.slice(
+                            foundIndex + foundValue.length,
+                        );
+                        if (!after.match(pat.end)) {
+                            continue;
+                        }
+                    }
                     const end = foundIndex + foundValue.length;
                     if (start < foundIndex) {
                         new_source.push({

@@ -166,6 +166,7 @@ import { AtomOneDark } from "./atom-one-dark";
 export function selectTheme(theme: string) {
     switch (theme) {
         case "github-dark":
+        case "gh-dark":
             return GithubDark;
         case "atom-one-dark":
         case "atom-dark":

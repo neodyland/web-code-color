@@ -17,6 +17,8 @@ export type Match =
           is_regex: boolean;
           value: string;
           match_at?: number;
+          end?: string;
+          start?: string;
       };
 
 export enum TokenType {

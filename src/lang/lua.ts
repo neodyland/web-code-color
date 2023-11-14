@@ -1,4 +1,5 @@
 import { Lang } from "../interface";
+import { StartEndIdent } from "./common";
 
 export const Lua: Lang = {
     name: "Lua",
@@ -15,8 +16,8 @@ export const Lua: Lang = {
     keywords: [
         {
             is_regex: true,
-            value: "([^a-zA-Z0-9_]|^)(and|break|do|else|elseif|end|false|for|function|if|in|local|nil|not|or|repeat|return|then|true|until|while)($|[^a-zA-Z0-9_])",
-            match_at: 2,
+            value: "and|break|do|else|elseif|end|false|for|function|if|in|local|nil|not|or|repeat|return|then|true|until|while",
+            ...StartEndIdent,
         },
     ],
     builtins: [],

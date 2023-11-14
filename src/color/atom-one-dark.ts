@@ -21,6 +21,9 @@ export const AtomOneDark: ColorConfig = {
     operators: {
         value: "#abb2bf",
     },
+    types: {
+        value: "#d19a66",
+    },
     identifiers: {
         value: "#d19a66",
     },

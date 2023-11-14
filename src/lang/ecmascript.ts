@@ -28,6 +28,13 @@ export const EcmaScript: Lang = {
         },
     ],
     operators: [],
+    types: [
+        {
+            is_regex: true,
+            value: "number|string|boolean|symbol|undefined|object|function|bigint|any|never|unknown|void",
+            ...StartEndIdent,
+        },
+    ],
     identifiers: CIdents,
     punctuations: [],
 };

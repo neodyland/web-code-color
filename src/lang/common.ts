@@ -9,7 +9,19 @@ export const CComments = [
 
 export const CStrings = ['".*?"', "'.*?'"];
 
-export const CNumbers = ["[0-9]+(\\.[0-9]+)?", "0x[0-9a-fA-F]+"];
+const StartEndNumber = {
+    start: "^$|[ \\t\\(\\)\\[\\]\\{\\}\\|\\^\\&\\<\\>\\=\\+\\-\\*\\/\\%\\!\\~\\,\\;\\:\\?\\'\\\"\\`]$",
+    end: "^$|^[ \\t\\(\\)\\[\\]\\{\\}\\|\\^\\&\\<\\>\\=\\+\\-\\*\\/\\%\\!\\~\\,\\;\\:\\?\\'\\\"\\`]",
+};
+
+export const CNumbers = [
+    {
+        is_regex: true,
+        value: "[0-9]+(\\.[0-9]+)?",
+        ...StartEndNumber,
+    },
+    { is_regex: true, value: "0x[0-9a-fA-F]+", ...StartEndNumber },
+];
 
 export const CIdents = [
     { is_regex: true, value: "[a-zA-Z_][a-zA-Z0-9_]*", end: "^$|^[^:.]" },

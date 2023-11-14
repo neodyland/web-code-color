@@ -28,6 +28,13 @@ export const Rust: Lang = {
         },
     ],
     operators: [],
+    types: [
+        {
+            is_regex: true,
+            value: "bool|char|f32|f64|i8|i16|i32|i64|i128|isize|str|u8|u16|u32|u64|u128|usize|Option|Result|String|Box|Vec|Option|Result|String|Box|Vec",
+            ...StartEndIdent,
+        },
+    ],
     identifiers: CIdents,
     punctuations: [],
 };

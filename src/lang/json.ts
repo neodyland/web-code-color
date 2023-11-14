@@ -10,6 +10,7 @@ export const Json: Lang = {
     keywords: ["true", "false", "null"],
     builtins: [],
     operators: [":", ",", "\\[", "\\]", "\\{", "\\}"],
+    types: [],
     identifiers: CIdents,
     punctuations: ["\\."],
 };

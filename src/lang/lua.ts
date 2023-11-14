@@ -22,6 +22,7 @@ export const Lua: Lang = {
     ],
     builtins: [],
     operators: [],
+    types: [],
     identifiers: [
         { is_regex: true, value: "([a-zA-Z_][a-zA-Z0-9_]*)\\(", match_at: 1 },
     ],

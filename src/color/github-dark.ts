@@ -21,6 +21,9 @@ export const GithubDark: ColorConfig = {
     operators: {
         value: "#c9d1d9",
     },
+    types: {
+        value: "#ff7b72",
+    },
     identifiers: {
         value: "#d2a8ff",
     },

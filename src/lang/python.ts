@@ -22,6 +22,13 @@ export const Python: Lang = {
         },
     ],
     operators: [":", ",", "\\[", "\\]", "\\{", "\\}"],
+    types: [
+        {
+            is_regex: true,
+            value: "int|float|complex|list|tuple|range|str|bytes|bytearray|memoryview|set|frozenset|dict",
+            ...StartEndIdent,
+        },
+    ],
     identifiers: CIdents,
     punctuations: ["\\."],
 };

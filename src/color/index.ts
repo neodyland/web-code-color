@@ -14,6 +14,7 @@ export interface ColorConfig {
     builtins: Color;
     operators: Color;
     identifiers: Color;
+    types: Color;
     punctuations: Color;
     others: Color;
     bgColor?: string;
@@ -35,6 +36,7 @@ const tokenTypeMapping = {
     [TokenType.Builtin]: "builtins",
     [TokenType.Operator]: "operators",
     [TokenType.Identifier]: "identifiers",
+    [TokenType.Type]: "types",
     [TokenType.Punctuation]: "punctuations",
     [TokenType.Other]: "others",
 } as const;

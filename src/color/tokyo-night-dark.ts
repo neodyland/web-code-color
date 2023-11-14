@@ -21,6 +21,9 @@ export const TokyoNightDark: ColorConfig = {
     operators: {
         value: "#9aa5ce",
     },
+    types: {
+        value: "#ff9e64",
+    },
     identifiers: {
         value: "#ff9e64",
     },

@@ -35,6 +35,9 @@ export function parse(raw_source: string, lang: Lang) {
     for (const operator of lang.operators) {
         source = replace(source, operator, TokenType.Operator);
     }
+    for (const type of lang.types) {
+        source = replace(source, type, TokenType.Type);
+    }
     for (const identifier of lang.identifiers) {
         source = replace(source, identifier, TokenType.Identifier);
     }

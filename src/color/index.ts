@@ -1,10 +1,12 @@
 import { autoparse, parse } from "../";
 import { Token, TokenType } from "../interface";
 import { Lang as LanguageInterface } from "../interface";
-import { Languages, Language, languageMap } from "../lang";
+import { Language, languageMap } from "../lang";
 import { escapeHtml } from "../util";
 
 export interface ColorConfig {
+    name: string;
+    ids: string[];
     comments: Color;
     strings: Color;
     numbers: Color;
@@ -154,21 +156,9 @@ import { GithubDark } from "./github-dark";
 import { TokyoNightDark } from "./tokyo-night-dark";
 
 export function selectTheme(theme: string) {
-    switch (theme) {
-        case "github-dark":
-        case "gh-dark":
-            return GithubDark;
-        case "atom-one-dark":
-        case "atom-dark":
-            return AtomOneDark;
-        case "tokyo-night-dark":
-        case "tokyo-night":
-        case "tk-night":
-        case "tk-night-dark":
-            return TokyoNightDark;
-        default:
-            return GithubDark;
-    }
+    return themes.find((t) => t.ids.includes(theme)) ?? themes[0];
 }
 
 export { GithubDark, AtomOneDark, TokyoNightDark };
+
+export const themes = [GithubDark, AtomOneDark, TokyoNightDark];

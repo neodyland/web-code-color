@@ -1,6 +1,8 @@
 import type { ColorConfig } from "../";
 
 export const GithubDark: ColorConfig = {
+    name: "Github Dark",
+    ids: ["github-dark", "gh-dark"],
     comments: {
         value: "#8b949e",
     },

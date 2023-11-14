@@ -1,0 +1,33 @@
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Progress: resolved 12, reused 9, downloaded 2, added 0
+Progress: resolved 15, reused 9, downloaded 4, added 0
+Progress: resolved 119, reused 111, downloaded 6, added 0
+Progress: resolved 171, reused 161, downloaded 7, added 0
+Progress: resolved 182, reused 166, downloaded 10, added 0
+Progress: resolved 195, reused 171, downloaded 17, added 0
+Progress: resolved 228, reused 175, downloaded 21, added 0
+Progress: resolved 248, reused 191, downloaded 23, added 0
+Progress: resolved 279, reused 216, downloaded 28, added 0
+Progress: resolved 304, reused 243, downloaded 30, added 0
+Progress: resolved 325, reused 262, downloaded 31, added 0
+Progress: resolved 379, reused 314, downloaded 34, added 0
+Progress: resolved 468, reused 394, downloaded 38, added 0
+Progress: resolved 582, reused 504, downloaded 40, added 0
+Progress: resolved 637, reused 534, downloaded 44, added 0
+Progress: resolved 650, reused 536, downloaded 55, added 0
+Progress: resolved 706, reused 582, downloaded 69, added 0
+Progress: resolved 797, reused 662, downloaded 76, added 0
+Progress: resolved 861, reused 717, downloaded 85, added 0
+Progress: resolved 925, reused 775, downloaded 98, added 0
+ WARN  3 deprecated subdependencies found: @babel/plugin-proposal-class-properties@7.18.6, @babel/plugin-proposal-nullish-coalescing-operator@7.18.6, @babel/plugin-proposal-optional-chaining@7.21.0
+Packages: +731
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 930, reused 779, downloaded 103, added 0
+Progress: resolved 930, reused 779, downloaded 103, added 89
+Progress: resolved 930, reused 779, downloaded 103, added 204
+Progress: resolved 930, reused 779, downloaded 103, added 277
+Progress: resolved 930, reused 779, downloaded 103, added 487
+Progress: resolved 930, reused 779, downloaded 103, added 608
+Progress: resolved 930, reused 779, downloaded 103, added 707
+Progress: resolved 930, reused 779, downloaded 103, added 730
+Progress: resolved 930, reused 779, downloaded 103, added 731, done

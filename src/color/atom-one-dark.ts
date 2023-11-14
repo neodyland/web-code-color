@@ -1,6 +1,8 @@
 import type { ColorConfig } from "../";
 
 export const AtomOneDark: ColorConfig = {
+    name: "Atom One Dark",
+    ids: ["atom-one-dark"],
     comments: {
         value: "#5c6370",
     },

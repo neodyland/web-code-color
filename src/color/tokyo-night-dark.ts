@@ -1,6 +1,8 @@
 import type { ColorConfig } from "../";
 
 export const TokyoNightDark: ColorConfig = {
+    name: "Tokyo Night Dark",
+    ids: ["tokyo-night-dark", "tokyo-night", "tk-night", "tk-night-dark"],
     comments: {
         value: "#565f89",
     },

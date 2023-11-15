@@ -10,7 +10,6 @@ export function autoparse(path: string, code: string) {
     return [lang[1], parse(code, lang[0])] as const;
 }
 
-export { parse };
-
 export * from "./color";
-export { Languages } from "./lang";
+export * from "./lang";
+export * from "./parser";

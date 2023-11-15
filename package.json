@@ -1,6 +1,6 @@
 {
   "name": "web-code-color",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A small syntax highlight library for web",
   "main": "dist/index.cjs",
   "types": "dist/index.d.ts",
@@ -11,7 +11,7 @@
     "build:trans": "node build.mjs",
     "build:tsc": "tsc",
     "build": "run-s build:trans build:tsc",
-    "prepublishOnly": "run-s build",
+    "prepublishOnly": "run-s lint format build",
     "test": "http-server -p 8080 -c-1"
   },
   "repository": {

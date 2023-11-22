@@ -82,7 +82,7 @@ export function simpleHtml(
     }
     if (cfg.links) {
         html = html.replace(
-            /(https?:\/\/[^\s<>]+)/g,
+            /(https?:\/\/[\w!?\/+\-_~;.,*&@#$%()[\]]+)/g,
             '<a href="$1" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;:hover:{text-decoration:underline}">$1</a>',
         );
     }
